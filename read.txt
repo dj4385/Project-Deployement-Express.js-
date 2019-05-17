@@ -1,0 +1,30 @@
+steps to deploy angular project on node server:- 
+
+Step 1: Create a folder for your project deployement and open command promp in:-
+	a) Initalize the package.json (npm init -y)
+	b) Install the packages to create server....express, path
+
+Step 2: Create the build of angular project and copy the dist folder into your deployement folder 
+Step 3: Create a file name server.js and write the following code...
+	const express = require('express')
+	const path = require('path')
+
+	const app = express()
+
+	app.use(express.static(__dirname + '/dist/<subfoldername>/'))
+
+	app.get('/*', function(req, res){
+		res.sendFile(path.join(__dirname + '/dist/<subfoldername>/<filename.html>'))
+	})
+
+	app.listen(process.env.PORT || 3000, ()=> {
+		console.log("Project is running on localhost:3000")
+	})
+
+Step 4: Then go to package.json > scripts.. write the following line in "start"
+	"scripts" : {
+		"start" : "npm server.js"
+	}
+
+
+Thank you....
